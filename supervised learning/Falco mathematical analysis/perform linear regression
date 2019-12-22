@@ -1,0 +1,25 @@
+# calculate mean sum squared error
+mseSum = 0
+for i in range(len(df_falco)): # iterate through all elements (i.e. frames + %)
+    mse = np.mean((Y[i] - f(X)) ** 2) # takes difference of (individual dot - trend line)
+    mseSum += mse
+print("Total mean sum squared error: " + str(mseSum)) # total error for all points to the trend line
+
+# new DataFrame arrays, 2d for input + 1d for output
+xRegression = df_falco[['Frames']]
+yRegression = df_falco['Damage']
+
+regression = linear_model.LinearRegression()
+regression.fit(xRegression, yRegression)
+
+y_int = regression.intercept_
+x_coefficient = regression.coef_
+x_coefficient = float(x_coefficient) # convert from array to float
+
+# use sympy modules for differentiation
+x = Symbol('x')
+yFn = x_coefficient * x + y_int
+
+print("\nY-intercept: " + str(y_int))
+print("Coefficient: " + str(x_coefficient))
+print("Trend line equation: " + str(yFn))

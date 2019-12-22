@@ -1,0 +1,30 @@
+print(physBulkArray)
+print(physSpdArray)
+print(spBulkArray)
+print(spSpdArray)
+print(tankArray)
+print(stealthRockArray)
+
+x1 = [1, physBulkArray[0], physBulkArray[1]]
+x2 = [1, physSpdArray[0], physSpdArray[1]]
+x3 = [1, spBulkArray[0], spBulkArray[1]]
+x4 = [1, spSpdArray[0], spSpdArray[1]]
+x5 = [1, tankArray[0], tankArray[1]]
+x6 = [1, stealthRockArray[0], stealthRockArray[1]]
+matrix = np.array([x1, x2, x3, x4, x5, x6])
+
+y = np.array([physBulkArray[2], physSpdArray[2], spBulkArray[2],
+              spSpdArray[2], tankArray[2], stealthRockArray[2]])
+
+transpose = matrix.transpose()
+matrixProduct = transpose.dot(matrix)
+
+try:
+    matrixProduct = np.linalg.inv(matrix)
+except np.linalg.LinAlgError:
+    # matrix is not invertible
+    pass
+
+matrixProduct2 = transpose.dot(y)
+theta = matrixProduct.dot(matrixProduct2)
+print(str(theta))

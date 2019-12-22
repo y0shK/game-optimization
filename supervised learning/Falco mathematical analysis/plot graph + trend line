@@ -1,0 +1,18 @@
+"""
+sort values in dictionary key by ascending, then reassign dictionary
+    values to their keys so I keep each ordered pair (x, y) intact
+"""
+X = df_falco['Frames'].sort_values(ascending=True)
+Y = df_falco['Damage'].reindex(df_falco['Frames'].sort_values().index)
+
+plt.scatter(X, Y, color='red')
+plt.title('Falco Frame Data vs. Damage Given', fontsize=14)
+plt.xlabel('Frames (frames)', fontsize=12)
+plt.ylabel('Damage (%)', fontsize=12)
+plt.grid(True)
+
+# plot a linear polynomial for a trend line
+z = np.polyfit(X, Y, 1)
+f = np.poly1d(z)
+plt.plot(X, f(X))
+plt.show()

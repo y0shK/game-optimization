@@ -1,0 +1,52 @@
+"""
+-the derivative of the cost function (which is a quadratic) becomes
+linear, so the chain rule will cancel out the 2 in the denominator
+-theta (which is the slope of the trendline) is used in the cost function
+    as the domain; it goes to 0 and gradient descent finishes
+"""
+
+# if alpha is too big, theta can oscillate between > and < 0 like sin(x)
+def check_oscillation(thetaVal, batch):
+    posOdd = False
+    posEven = False
+    negOdd = False
+    negEven = False
+
+    """
+    if two successive numbers are opposite signs (and they are
+    opposite parities by definition of succession) then we know that
+    theta values are oscillating, so we check parity and sign to stop it
+    """
+    if (0 < thetaVal < 0.01) and batch % 2 == 1 or batch % 2 == 0:
+        posOdd = True
+    if (0 < thetaVal < 0.01) and batch % 2 == 0 or batch % 2 == 1:
+        posEven = True
+    if (-0.09 < thetaVal < 0) and batch % 2 == 1 or batch % 2 == 0:
+        negOdd = True
+    if (-0.09 < thetaVal < 0) and batch % 2 == 0 or batch % 2 == 1:
+        negEven = True
+
+    # parity and sign are guaranteed to switch; stop the algorithm
+    if (posOdd and negEven) or (negOdd and posEven):
+        print("The gradient descent is gonna oscillate! Let's stop here.")
+        print("It took %s steps :)" % str(batch))
+        exit()
+
+def gradient_descent(thetaVal, alphaVal, mseSum, mValue):
+    # m is the list of elements, so the length of the DataFrame is the m value
+    batch = 0
+    while thetaVal != 0: # operation +- depending on the sign of theta
+        if thetaVal > 0:
+            thetaVal = thetaVal - (alphaVal * mseSum) / (mValue + 1) # mValue is zero-indexed
+        elif thetaVal < 0:
+            thetaVal = thetaVal + (alphaVal * mseSum) / (mValue + 1)
+        else:
+            print("Gradient descent completed! It took %s steps :)" % str(batch))
+            exit()
+        print(thetaVal)
+        batch += 1
+
+        # check after every new value to stop the algorithm when necessary
+        check_oscillation(thetaVal, batch)
+
+gradient_descent(theta, alpha, mseSum, len(df))

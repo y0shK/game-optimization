@@ -1,0 +1,19 @@
+"""
+-I need m x n and n x o matrices for the matrix product
+-the resulting product is an m x o matrix which crosses the elements
+    of the trend line with the DataFrame data
+"""
+trendLine = [x_coefficient, y_int]
+trendLineArray = np.array([trendLine]) # 1x2
+falcoArray = np.array([df_falco['Frames'], df_falco['Damage']]) #2x23
+
+print("\nThe 1x2 matrix from the trend line equation: " + str(trendLineArray))
+print("Falco's 2x23 matrix of frame data and damage: " + str(falcoArray))
+
+# dot product performs multiplication for each element
+matrixProduct = trendLineArray.dot(falcoArray)
+print("\nThe matrix product of the trend line and Falco's stats: "
+      + str(matrixProduct))
+print("\nThe product is a %sx%s matrix :)" % (matrixProduct.shape[0],
+        matrixProduct.shape[1]))
+        

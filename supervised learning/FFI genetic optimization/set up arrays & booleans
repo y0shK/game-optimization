@@ -1,0 +1,18 @@
+import random
+import numpy as np
+
+# set up classes
+warrior = [5, 5, 2, 1, 2, False, False]
+thief = [4, 3, 5, 1, 1, False, False]
+monk = [5, 4, 3, 1, 2, False, False]
+mageWhite = [1, 2, 3, 5, 4, False, True]
+mageBlack = [1, 2, 3, 5 , 4, True, False]
+mageRed = [3, 4, 2, 4, 3, True, True]
+
+# set up array that links to stats to create party
+ff_classes = [warrior, thief, monk, mageWhite, mageBlack, mageRed]
+
+# need two damage dealers, one healer, and one offensive mage
+keepDPS = False
+keepHealer = False
+keepNuker = False

@@ -1,0 +1,25 @@
+# calculate mean sum squared error
+mseSum = 0
+for i in range(len(df)): # iterate through all elements (i.e. batters)
+    mse = np.mean((Y[i] - p(X)) ** 2) # takes difference of (individual dot - trendline)
+    mseSum += mse
+print(mseSum) # total error for all points to the trendline
+
+# new DataFrame arrays, 2d for input + 1d for output
+xRegression = df[['Average']]
+yRegression = df['WAR']
+
+regression = linear_model.LinearRegression()
+regression.fit(xRegression, yRegression)
+
+y_int = regression.intercept_
+x_coefficient = regression.coef_
+x_coefficient = float(x_coefficient) # convert from array to float
+
+# use sympy modules for differentiation
+x = Symbol('x')
+yFn = x_coefficient * x + y_int
+
+print("\nY-intercept: " + str(y_int))
+print("Coefficient: " + str(x_coefficient))
+print("AVG: " + str(yFn))

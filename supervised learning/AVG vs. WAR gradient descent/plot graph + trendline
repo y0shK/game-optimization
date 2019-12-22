@@ -1,0 +1,11 @@
+plt.scatter(X, Y, color='red')
+plt.title('WAR vs. Average', fontsize=14)
+plt.xlabel("Average", fontsize=12)
+plt.ylabel("WAR", fontsize=12)
+plt.grid(True)
+
+# use numpy modules to create trendline
+z = np.polyfit(X, Y, 1)
+p = np.poly1d(z)
+plt.plot(X, p(X))
+plt.show()

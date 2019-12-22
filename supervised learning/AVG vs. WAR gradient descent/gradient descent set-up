@@ -1,0 +1,19 @@
+"""
+-the derivative of a first order Taylor polynomial is a single value
+-for gradient descent, the derivative (which is a Taylor polynomial
+of order 0) is used as input for the cost function J(theta), such that
+theta = value of the derivative as calculated by the trendline
+"""
+trendDeriv = yFn.diff(x)
+print(str(trendDeriv))
+
+"""
+-let theta be written as "t"
+-the algorithm is: t = t +- alpha * d/dt (mseSum) / (2m), where:
+alpha is the learning rate parameter
+m is the number of element pairs (x, y) in the set
+mseSum is the sum from 1 to m of (the differences between the
+    actual values and the values plotted on the trendline)^2
+"""
+alpha = 0.01 # arbitrary constant
+theta = trendDeriv # starting definition

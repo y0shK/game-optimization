@@ -1,0 +1,24 @@
+def create_plt(string, color):
+    plt.scatter(df[string], df['WAR'], color='%s' % color)
+    plt.title('WAR vs. %s' % string, fontsize=14)
+    plt.xlabel("%s" % string, fontsize=12)
+    plt.ylabel("WAR", fontsize=12)
+    plt.grid(True)
+    plt.show()
+
+create_plt('Average', 'red')
+create_plt('HR', 'blue')
+create_plt('RBI', 'green')
+
+# use Pandas data frames to gauge Triple-Crown stats vs. WAR
+X = df[["Average", "HR", "RBI"]]
+Y = df['WAR']
+
+regression = linear_model.LinearRegression()
+regression.fit(X, Y)
+
+print("Y-intercept: " + str(regression.intercept_))
+print("Coefficient: " + str(regression.coef_))
+print("AVG: y= %sx + %s" % (regression.coef_[0], regression.intercept_))
+print("HR: y= %sx + %s" % (regression.coef_[1], regression.intercept_))
+print("RBI: y= %sx + %s" % (regression.coef_[2], regression.intercept_))

@@ -1,0 +1,28 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from pandas import DataFrame
+from sklearn import linear_model
+from sympy import *
+
+"""
+players chosen:
+    Mike Trout, Mookie Betts, Buster Posey, Kyle Seager,
+    Mike Moustakas, Scooter Gennett, Salvador Perez, Andrew McCutchen
+    Andrelton Simmons, Joey Votto, Eugenio Suarez, Tommy Pham,
+    Giancarlo Stanton, Jurickson Profar, Jackie Bradley Jr., Jason Kipnis,
+    Jose Martinez, Corey Dickerson, Nolan Arenado, Trevor Story,
+    Lorenzo Cain, Michael Brantley, Freddie Freeman, Christian Yelich
+"""
+
+players = {'Average': [.312, .346, .284, .221, .251, .310, .235, .255,
+                       .292, .284, .283, .275, .266, .254, .234, .230, .305, .300,
+                       .297, .291, .308, .309, .309, .326],
+                   'WAR': [10.2, 10.9, 2.9, 0.8, 2.5, 4.2, 2.4, 2.7, 6.2, 3.5, 4.2,
+                        3.4, 4.0, 2.0, 2.1, 1.6, 1.5, 3.8, 5.6, 5.6, 6.9, 3.6, 6.1, 7.6]}
+
+df = DataFrame(players, columns=['Average', 'WAR'])
+print(df)
+
+# set up DataFrame arrays + AVG vs. WAR plot
+X = df['Average']
+Y = df['WAR']

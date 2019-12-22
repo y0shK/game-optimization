@@ -1,0 +1,22 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from pandas import DataFrame
+from sklearn import linear_model
+from sympy import *
+
+"""
+-I assume max amount of frames for executing move
+-I used the SmashBoards Falco frame data thread to assign frames
+    -https://smashboards.com/threads/falco-hitboxes-and-frame-data.300397/
+-Other useful resources:
+    -https://stackoverflow.com/questions/30486263/sorting-by-absolute-value-without-changing-the-data
+    -https://stackoverflow.com/questions/14847457/how-do-i-find-the-length-or-dimensions-size-of-a-numpy-matrix-in-python
+"""
+
+falco = {'Frames': [17, 20, 36, 39, 26, 26, 26, 23, 29, 49, 59, 39, 49, 46,
+                    45, 51, 57, 29, 29, 21, 21, 64, 1],
+         'Damage': [3, 4, 5, 9, 8, 8, 8, 8, 10, 11, 13, 10, 14, 8, 17, 15,
+                    16, 5, 5, 7, 7, 16, 8]}
+
+df_falco = DataFrame(falco, columns=['Frames', 'Damage'])
+print(df_falco)

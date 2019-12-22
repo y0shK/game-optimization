@@ -1,0 +1,11 @@
+# prediction with sklearn
+print("\nEnter AVG")
+avg = float(input())
+
+print("\nEnter HR")
+hr = int(input())
+
+print("\nEnter RBI")
+rbi = int(input())
+
+print("Predicted WAR: " + str(regression.predict([[avg, hr, rbi]])))

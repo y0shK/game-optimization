@@ -1,0 +1,96 @@
+def checkSweepers(directory):
+    # row 5 is HP, 6 is Attack, 7 is Special Attack, 9 is Special Defense, 10 is Speed
+    with open(directory, newline="") as file:
+        reader = csv.reader(file)
+        next(file) # skip intro line
+        for row in reader:
+            if int(row[5]) >= 105 and int(row[6]) >= 105:
+                physBulk.append(row[1])
+            if int(row[10]) >= 105 and int(row[6]) >= 105:
+                physSpd.append(row[1])
+            if int(row[5]) >= 105 and int(row[7]) >= 105:
+                spBulk.append(row[1])
+            if int(row[10]) >= 105 and int(row[7]) >= 105:
+                spSpd.append((row[1]))
+            if int(row[7]) >= 105 and int(row[9]) >= 105:
+                tank.append(row[1])
+
+checkSweepers(csvDirectory)
+print(physBulk)
+print(physSpd)
+print(spBulk)
+print(spSpd)
+print(tank)
+
+"""
+-choose 6 random Pokemon
+-one of each category + stealth rocker
+-implement restrictions; no duplicates, mega evolutions <= 1
+"""
+
+# take qualified Pokemon from each category and pick one at random to add to the team
+def addToTeam(teamNiche, teamArray):
+    teamArray.append(teamNiche[(random.randrange(0, len(teamNiche)))])
+
+teamValid = False # becomes true if randomized team meets criteria
+def verifyTeam(team):
+    unique = True
+    megaCount = 0
+    megaCountGood = True
+    global teamValid
+
+    # ensure through iteration that each team member is distinct
+    for i in range(0, len(team)):
+        if 0 < i < 5 and team[i] == team[i+1]:
+            unique = False
+            if team[i] in team[i+1]: # check to make sure one Pokemon isn't a Mega and another pokemon isn't a regular form of the same Mega
+                unique = False
+        elif i == 5 and team[5] == team[0]:
+            unique = False
+            if team[5] in team[0]:
+                unique = False
+        if "Mega" in team[i]: # ensure that Mega Pokemon are <= 1 on each team
+            megaCount += 1
+    if megaCount > 1:
+        megaCountGood = False
+    print(megaCountGood)
+    if unique and megaCountGood: # conditions met, so return boolean True
+        teamValid = True
+        print(team)
+        return teamValid
+    else: # team is not valid; regenerate team
+        team = []
+        for pokemonName in categories:
+            addToTeam(pokemonName, team)
+        unique = True
+        megaCount = 0
+        megaCountGood = True
+
+        for i in range(0, len(team)):
+            if 0 < i < 5 and team[i] == team[i + 1]:
+                unique = False
+                # check to make sure one Pokemon isn't a Mega and another pokemon isn't a regular form of the same Mega
+                if team[i] in team[i + 1]:
+                    unique = False
+            elif i == 5 and team[5] == team[0]:
+                unique = False
+                if team[5] in team[0]:
+                    unique = False
+            if "Mega" in team[i]:
+                megaCount += 1
+        if megaCount > 1:
+            megaCountGood = False
+        print(megaCountGood)
+        if unique and megaCountGood:
+            teamValid = True
+            print(team)
+            return teamValid
+        else:
+            exit() # can't graph + perform gradient descent if function isn't smooth
+
+team = []
+categories = [physBulk, physSpd, spBulk, spSpd, tank, stealthRock]
+
+for pokemon in categories:
+    addToTeam(pokemon, team)
+verifyTeam(team)
