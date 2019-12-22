@@ -1,0 +1,15 @@
+# program to optimize flight paths in FTL
+# really a mathematical problem, maximize yields
+
+"""
+Links referenced:
+-https://stackoverflow.com/questions/35363444/plotting-lines-connecting-points
+"""
+
+import matplotlib.pyplot as plt
+import random
+
+xLoc = []
+yLoc = []
+upperBound = 10 # arbitrarily chosen to enclose points
+iterator = 3 # arbitrarily chosen to make travel between points feasible, not too far apart
