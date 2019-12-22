@@ -1,0 +1,20 @@
+# artificially bound the points together so path travel is actually possible, not zigzagging all over the plane
+def pointBounds(array, bound, delta, index1, index2):
+    while abs(array[index1] - array[index2]) > delta: # distance between points is less than a given value
+        array[index1] = array[index2] + delta
+        if array[index1] > bound or array[index2] > bound: # if a point is out of the plane, bring it back in
+            array[index1] = bound - random.randint(0,bound)
+        if abs(array[index1] - array[index2]) <= delta: # conditions met, plane is sufficiently constricted
+            break
+            
+def graph(xAxis, yAxis):
+    # graph lines that connect the ordered pairs to show connections
+    for i in range(1, len(xAxis)):
+        x1, x2 = xAxis[i], xAxis[i-1]
+        y1, y2 = yAxis[i], yAxis[i-1]
+        plt.plot([x1, x2], [y1, y2])
+
+    plt.scatter(xAxis, yAxis)
+    plt.title("FTL graph")
+    plt.show()
+    
